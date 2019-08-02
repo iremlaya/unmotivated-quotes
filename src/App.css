@@ -1,33 +1,109 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.container {
+  display: flex;
+  align-self: center;
+  width: 80%;
+  height: 80%;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.right {
+  width: 50%;
+  justify-content: flex-end;
+  display: flex;
+}
+
+.quote-body {
+  display: flex;
+  margin-top: 33vh;
+  width: 80%;
+  align-self: center;
+  flex-direction: column;
+}
+
+.quote {
+  font-size: 3em;
   color: white;
+  font-family: Merriweather;
 }
 
-.App-link {
-  color: #61dafb;
+.source {
+  margin-top: 5vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.source a:-webkit-any-link {
+  color: white;
+  font-size: 2em;
+  text-decoration-line: none;
+  font-weight: bold;
+}
+
+.submit {
+  background-color: #1cc7d0;
+  border: none;
+  color: white;
+  padding: 5px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 15px;
+}
+
+.submit:hover {
+  background-color: #24b5bd;
+}
+
+.submit:active {
+  background-color: #1c9ba1;
+}
+
+.refresh {
+  margin-right: 8px;
+  background: url(./assets/refresh.svg);
+  background-repeat: no-repeat;
+  border: none;
+  background-size: 70%;
+  background-position: center;
+  width: 36px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 18px;
+  -webkit-transition: all 0.2 ease;  
+  -moz-transition: all 0.2 ease;  
+  -o-transition: all 0.2 ease;  
+  -ms-transition: all 0.2 ease;  
+  transition: all 0.2s ease;
+}
+
+.refresh:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.refresh:active {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
 }
