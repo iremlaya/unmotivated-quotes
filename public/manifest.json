@@ -4,10 +4,9 @@
   "author": "iremlaya",
   "version": "1.0.0",
   "description": "Replace new tab screen with unmotivated quotes.",
-  
-  "chrome_url_overrides": {
-    "newtab": "index.html"
-  },
-  "permissions": ["storage"],
-  "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'"
+  "permissions" : ["management", "history", "storage"],
+    "chrome_url_overrides" : {
+        "newtab": "index.html"
+    },
+    "content_security_policy":"script-src 'self' https://apis.google.com; object-src 'self'"
 } 
