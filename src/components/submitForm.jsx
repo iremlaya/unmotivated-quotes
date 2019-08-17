@@ -6,7 +6,9 @@ function SubmitForm(props) {
     const [quote, setQuote] = useState("");
     const [sourceName, setSourceName] = useState("");
     const [sourceUrl, setSourceUrl] = useState("");
-    
+
+    const CloseButton = () => (<button>Close modal</button>);
+
     return(
         <div>
             <Modal
@@ -31,9 +33,17 @@ function SubmitForm(props) {
                         }
                     );
                 }}>
-                   <label className="label">
+
+                <button
+                    className="close-button"
+                    onClick={props.onClose}
+                >
+                    x
+                </button>
+
+                <label className="label">
                     Help other people unmotivate with your quote!
-                   </label>
+                </label>
                 <input
                     className={typeof quote === "string" ? "input" : "input-error"}
                     type="text"
