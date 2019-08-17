@@ -42,6 +42,7 @@ function SubmitForm(props) {
                 <label className="label">
                     Help other people unmotivate with your quote!
                 </label>
+                
                 <input
                     className={typeof quote === "string" ? "input" : "input-error"}
                     type="text"
