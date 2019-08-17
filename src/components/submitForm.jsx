@@ -7,8 +7,6 @@ function SubmitForm(props) {
     const [sourceName, setSourceName] = useState("");
     const [sourceUrl, setSourceUrl] = useState("");
 
-    const CloseButton = () => (<button>Close modal</button>);
-
     return(
         <div>
             <Modal
