@@ -1,11 +1,10 @@
-/* global chrome */
 import React from 'react';
 import './App.css';
 import firebase from "firebase/app"
 import config from "./config/fbConfig";
 import "firebase/firestore"
 import "firebase/auth"
-import { DH_CHECK_P_NOT_PRIME } from 'constants';
+import SubmitForm from "./components/submitForm"
 
 class App extends React.Component {
 
@@ -16,28 +15,10 @@ class App extends React.Component {
     
     this.state = {
       quote:  {},
-      isLoading: true
+      isLoading: true,
+      isSubmitFormOpen: false
     }
-    this.quotes = [
-      {
-        text: 'The first step towards failure is trying.',
-        source: {
-          displayName: 'Gecko & Fly',
-          url: 'https://www.geckoandfly.com/18885/unmotivated-quotes-friends-enemies-overconfident/'
-        },
-        backgroundImage: 'https://images.unsplash.com/photo-1488426314888-94c9164df81d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80',
-        backgroundGradient: ['#8a7967', '#caccd1']
-      },
-      {
-        text: 'Tsdbbksking.',
-        source: {
-          displayName: 'Gecko & Fly',
-          url: 'https://www.geckoandfly.com/18885/unmotivated-quotes-friends-enemies-overconfident/'
-        },
-        backgroundImage: 'https://images.unsplash.com/photo-1488426314888-94c9164df81d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80',
-        backgroundGradient: ['#8a7967', '#caccd1']
-      },
-    ]
+    
   }
   componentDidMount() {
     this.getUserData();
@@ -48,19 +29,22 @@ class App extends React.Component {
   }
 
   handleRefresh = () => {
-    console.log("Refreshed!")
-    chrome.tabs.reload()
+    this.getUserData();
   }
 
   handleSubmit = () => {
-    console.log("Submitted!")
+    this.setState({
+      isSubmitFormOpen: true
+    })
+    
   }
   addQuote = () => {
     let ref = this.db.collection("quotes")
-    this.quotes.map((q) => {
-      
-      ref.add(q)
-    })
+    //this.quotes.map((q) => {
+    //  return ref.add(q)
+    //})
+    console.log(this.state.quote)
+    ref.add(this.state.quote)
   }
   getUserData = () => {
   
@@ -77,6 +61,12 @@ class App extends React.Component {
     console.log('Error getting documents', err);
   });
   }
+
+  closeModal = () => {
+    this.setState({
+      isSubmitFormOpen: false
+    })
+  }
   render() {
     return (
       this.state.isLoading ? <div></div> : 
@@ -89,6 +79,7 @@ class App extends React.Component {
               <button onClick={this.handleRefresh} className="refresh">
               </button>
               <button onClick={this.handleSubmit} className="submit">Submit</button>
+              <form></form>
             </div>
           </div>
           <div className="quote-body">
@@ -100,6 +91,25 @@ class App extends React.Component {
             </div>
           </div>
         </div>
+        {this.state.isSubmitFormOpen && <SubmitForm 
+        show={this.state.isSubmitFormOpen}
+        onClose={this.closeModal}
+        submitData={async data =>  {
+          await this.setState({
+            quote:data
+          });
+          this.addQuote()
+
+          /* OR:
+          componentDidUpdate(prevProps, prevState) {
+            if (this.state.value > prevState.value) {
+              this.foo();  
+            }
+          }
+           */
+        }}
+        />}
+        
       </div>
     );
   }
