@@ -8,14 +8,14 @@ function SubmitForm(props) {
     const [sourceUrl, setSourceUrl] = useState("");
 
     return(
-        <div>
+        <div >
             <Modal
                 isOpen={props.show}
                 onRequestClose={props.onClose}
-                className="modal"
-                overlayClassName="overlay"
+                className="modal animate-bottom"
+                //overlayClassName="overlay"
             >
-                <div className="form-container">
+                <div className="form-container ">
                 <form className="form" onSubmit={e =>
                  {
                     e.preventDefault();
@@ -32,16 +32,18 @@ function SubmitForm(props) {
                     );
                 }}>
 
-                <button
-                    className="close-button"
-                    onClick={props.onClose}
-                >
-                    x
-                </button>
-
-                <label className="label">
-                    Help other people unmotivate with your quote!
-                </label>
+                
+                <div class="close-container" onClick={props.onClose}>
+                    <div class="leftright"></div>
+                    <div class="rightleft"></div>
+                    <label class="close">close</label>
+                </div>
+                
+                <div className="intro-container">
+                    <p className="title">Got a Quote?</p>
+                    <p className="description">Unmotivate us with your creativity.</p>
+                </div>
+                
                 
                 <input
                     className={typeof quote === "string" ? "input" : "input-error"}

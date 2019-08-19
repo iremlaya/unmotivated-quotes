@@ -1,3 +1,102 @@
+
+.close-container{
+  display: flex;
+  justify-content: end; 
+  align-items: center;
+  align-self: flex-end;
+  width: 10%;
+  height: 5%;
+  cursor: pointer;
+  position: relative;
+}
+
+.leftright{
+  display: flex;
+  height: 8%;
+  width: 10px;
+  position: absolute;
+  background-color:  #73acf1;
+  border-radius: 30%;
+  margin-top: 8%;
+  margin-left: 20%;
+  transform: rotate(45deg);
+  transition: all .3s ease-in;
+}
+
+.rightleft{
+  height:8%;
+  width: 10px;
+  position: absolute;
+  background-color:  #73acf1;
+  border-radius: 30%;
+  transform: rotate(-45deg);
+  transition: all .3s ease-in;
+  margin-top: 8%;
+  margin-left: 20%;
+  display: flex;
+}
+
+label{
+  color: #9099AA;
+  font-family: Helvetica, Arial, sans-serif; 
+  font-size: 7px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  transition: all .3s ease-in;
+  opacity: 0;
+  align-self: flex-start;
+}
+.close{
+  margin-top: 20px;
+  margin-right: 10%;
+  margin-bottom:15%;
+  height: 25%;
+  width: 45%;
+  position: absolute;
+}
+
+.close-container:hover .leftright{
+  transform: rotate(-45deg);
+  background-color: #9acfe4;
+}
+.close-container:hover .rightleft{
+  transform: rotate(45deg);
+  background-color: #9acfe4;
+}
+.close-container:hover label{
+  opacity: 1;
+}
+
+.intro-container {
+  width:100%;
+  height:30%;
+  display:flex;
+  position: relative;
+  flex-direction: column;
+  align-self: auto;
+  align-items: start;
+  margin-inline-start: 10%
+  
+}
+.title {
+  position: absolute;
+  display: flex;
+  margin-bottom: 10%;
+  font-size: 30px;
+  color: #1d2945;
+  font-weight: bold;
+  font-family: 'oswald', sans-serif;
+  letter-spacing: 0px
+}
+
+.description {
+  margin-top: 22%;
+  position: absolute;
+  display: flex;
+  font-size: 12px;
+  color: #9099aa;
+  font-family: 'Work Sans', sans-serif;
+}
 .overlay {
     position: fixed;
     top: 0;
@@ -15,9 +114,28 @@
     right: 35%;
     bottom: 18%;
     background-color: rgb(255,255,255);
-    border-radius: 1%;
+    border-radius: 0.5%;
     border: rgb(200,200,200);
-    box-shadow: 5px 5px 15px 5px rgb(0,0,0,0.3);
+    box-shadow: 5px 5px 15px 5px rgb(0,0,0,0.03);
+
+    
+  
+  }
+
+  .animate-bottom {
+    animation: animatebottom 0.4s;
+  }
+  
+  @keyframes animatebottom {
+    from {
+      bottom: -300px;
+      opacity: 0;
+    }
+  
+    to {
+      bottom: 10;
+      opacity: 1;
+    }
   }
 
 .form-container {
@@ -26,96 +144,67 @@
     height:100%;
     align-items: center;
  
-    justify-content: center
+    justify-content: center;
+    
 }
 
 .form {
     display: flex;
     flex-direction: column;
     align-self: auto;
-    align-items: center;
+    
     align-content: space-between;
     width:100%;
-    height:100%
-}
+    height:100%;
 
-.label {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10%;
-  font-family: Merriweather;
-  font-size: 16px;
-  text-align: center;
-  color: rgb(104, 104, 104);
-  border-bottom-style: solid;
-  border-bottom-color: #ccc;
-  border-bottom-width: 0.05em;
-  padding-bottom: 4%
- 
 }
 
 .input {
   padding: .5rem;
-  font-size: 16px;
+  font-size: 14px;
   width: 40%;
   display: block;
   border-radius: 4px;
-  border: 1px solid #ccc;
-  margin-bottom: 4%
+  border: 1px solid #cbd0dc;
+  background-color: #fafcff  ;
+  margin-bottom: 4%;
+  margin-inline-start: 10%;
+  color: #1d2945;
+  
 }
-
+::placeholder {
+  color: #9099aa;
+  font-family: "work sans", sans-serif;
+}
 input:focus {
-  border-color: #007eff;
+  border-color: #9acff4;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
-    0 0 0 3px rgba(0, 126, 255, 0.1);
+    0 0 0 3px rgb(0,0,0,0 );
   outline: none;
 }
 
-.input-error {
-  border-color: red;
-}
-
-
-.input-feedback {
-  color: red;
-  margin-top: .25rem;
-}
 
 .submit-button {
+  margin-inline-start: 10%;
   max-width: 150px;
   padding: 12px 20px;
   border-style: none;
   border-radius: 5px;
-  background-color: #08c;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  background-color: #73acf1;
+  color: rgb(255, 255, 255);
   font-size: 17px;
   font-weight: 500;
-  color: #fff;
   cursor: pointer;
   outline: none;
   -webkit-appearance: none;
-  margin-bottom: 10%
+  align-self: flex-start;
+  margin-top: 8%
 }
 
 .submit-button:hover {
-  background-color: #24b5bd;
+  background-color: #9acff4;
 }
 
 .submit-button:active {
-  background-color: #1c9ba1;
-}
-
-
-.close-button {
-  align-self: flex-end;
-  margin-right: 1%;
-  margin-top: 1%;
-  border-style:none;
-  background-color: white;
-  cursor: pointer;
-}
-
-.close-button:hover {
-  color:#1c9ba1
+  background-color: #b6dcf8;
 }
