@@ -5,6 +5,14 @@ import config from "./config/fbConfig";
 import "firebase/firestore"
 import "firebase/auth"
 import SubmitForm from "./components/submitForm"
+import Unsplash from 'unsplash-js';
+import uns from "../tokens/unsplash";
+
+const unsplash = new Unsplash({
+  applicationId: uns.applicationId,
+  secret: uns.secret
+});
+
 
 class App extends React.Component {
 
@@ -15,17 +23,15 @@ class App extends React.Component {
     
     this.state = {
       quote:  {},
+      backgroundImage: {},
       isLoading: true,
       isSubmitFormOpen: false
     }
     
   }
   componentDidMount() {
+    //this.addBackgroundfromUnsplash()
     this.getUserData();
-    
-    //this.addQuote();
-   
-
   }
 
   handleRefresh = () => {
@@ -38,28 +44,63 @@ class App extends React.Component {
     })
     
   }
+
+  addBackgroundfromUnsplash = () => {
+    let refb = this.db.collection("backgrounds")
+    var i = 0
+    for(i; i<15; i++){
+      unsplash.photos.getRandomPhoto({width:1920, height:1080, query:"nature wallpaper",})
+      .then(a => a.json())
+      .then(json =>
+        refb.add({bg: json.urls.regular}))
+      
+    }
+    
+  }
   addQuote = () => {
     let ref = this.db.collection("quotes")
+    
     //this.quotes.map((q) => {
     //  return ref.add(q)
     //})
     console.log(this.state.quote)
     ref.add(this.state.quote)
+    
   }
-  getUserData = () => {
+  getUserData = async () => {
+      await this.getQuotes()
+      await this.getBackground()
+      this.setState({
+        isLoading: false
+      })
+    
+      console.log(this.state.quote)
   
+  }
+  getQuotes = async () => {
     firebase.firestore().collection('quotes').get()
+    .then(async (snapshot) => {
+      let len = snapshot.size
+      let random = Math.floor(Math.random() * (len - 1));
+      await this.setState({
+        quote: snapshot.docs[random].data()
+      })})
+      .catch((err) => {
+        console.log('Error getting quotes', err);
+      });
+  }
+
+  getBackground = async () => {
+    firebase.firestore().collection('backgrounds').get()
     .then((snapshot) => {
       let len = snapshot.size
       let random = Math.floor(Math.random() * (len - 1));
       this.setState({
-        quote: snapshot.docs[random].data(), isLoading: false
-      })
-      console.log(this.state.quote.source.url)
-  })
-  .catch((err) => {
-    console.log('Error getting documents', err);
-  });
+        backgroundImage: snapshot.docs[random].data()
+      })})
+      .catch((err) => {
+        console.log('Error getting images', err);
+      });
   }
 
   closeModal = () => {
@@ -71,7 +112,7 @@ class App extends React.Component {
     return (
       this.state.isLoading ? <div></div> : 
       <div className="App" style={{
-        backgroundImage: `url(${this.state.quote.backgroundImage})`
+        backgroundImage: `url(${this.state.backgroundImage.bg})`
       }}>
         <div className="container">
           <div className="header">
@@ -87,7 +128,7 @@ class App extends React.Component {
               {this.state.quote.text}
             </div>
             <div className="source">
-              <a href={this.state.quote.source.url}>-{this.state.quote.source.displayName}</a>
+              <a href={this.state.quote.sourceUrl}>-{this.state.quote.sourceName}</a>
             </div>
           </div>
         </div>

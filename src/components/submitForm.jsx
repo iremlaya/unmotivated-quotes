@@ -21,13 +21,9 @@ function SubmitForm(props) {
                     e.preventDefault();
                     props.submitData( 
                         {
-                          text: `${quote}`,
-                          source: {
-                            displayName: `${sourceName}`,
-                            url: `${sourceUrl}`
-                          },
-                          backgroundImage: 'https://images.unsplash.com/photo-1488426314888-94c9164df81d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80',
-                          backgroundGradient: ['#8a7967', '#caccd1']
+                          quote: `${quote}`,
+                          sourceName: `${sourceName}`,
+                          sourceUrl: `${sourceUrl}`,
                         }
                     );
                 }}>
@@ -46,7 +42,7 @@ function SubmitForm(props) {
                 
                 
                 <input
-                    className={typeof quote === "string" ? "input" : "input-error"}
+                    className={typeof quote === "string" ? "long-input" : "input-error"}
                     type="text"
                     required
                     name="quote"
