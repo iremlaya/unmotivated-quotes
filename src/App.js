@@ -6,7 +6,7 @@ import "firebase/firestore"
 import "firebase/auth"
 import SubmitForm from "./components/submitForm"
 import Unsplash from 'unsplash-js';
-import uns from "../tokens/unsplash";
+import uns from "./tokens/unsplash";
 
 const unsplash = new Unsplash({
   applicationId: uns.applicationId,
